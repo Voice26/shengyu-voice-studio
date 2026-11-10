@@ -17,15 +17,9 @@
 
 ## 启动工作台
 
-1. 在 Windows 项目根目录创建 Python 3.10 环境并安装依赖。
-
-   ```powershell
-   py -3.10 -m venv .venv
-   .\.venv\Scripts\python.exe -m pip install -r requirements-data.lock.txt
-   ```
-
-2. 在 GPU 服务器上部署项目及模型，配置 RVC 的 HuBERT、RMVPE 等基础资源。将 [平台配置](configs/platform.json) 中的 `ssh_host` 和 `remote_root` 改为自己的 SSH 别名和远端项目目录。环境版本与安装步骤见[服务器运行说明](docs/server_runbook.md)。
-3. 双击 **启动换声平台.bat**，打开本机工作台 `http://127.0.0.1:7866`。选择音频类型和目标音色后开始换声。可在侧栏的「最近生成」试听、下载或复用参数。支持的格式、参数含义和结果文件见[工作台使用说明](docs/platform_runbook.md)。
+1. 在 Windows x64 电脑上，将[当前项目 ZIP](https://github.com/Voice26/shengyu-voice-studio/archive/refs/heads/main.zip) 解压到可写的文件夹，双击 **配置换声环境.bat**。它会复用可用的项目 Python 环境；首次在新电脑上安装时，会联网下载经过 SHA-256 校验的便携 Python 和网页音频依赖，保存在项目目录内，无需手动设置 PATH。
+2. 配置窗口中，按回车沿用 GPU 服务器，或输入 `S` 设置自己的 SSH 别名和 Linux 项目目录。脚本会检查本地模型、SSH 客户端和远端推理环境。要实际换声，服务器需先部署 RVC、基础资源和对应模型，本机需能免密 SSH 登录。详见[服务器运行说明](docs/server_runbook.md)。
+3. 双击 **启动换声平台.bat**，打开本机工作台 `http://127.0.0.1:7866`。用完双击 **停止换声平台.bat**。迁移时复制或重新解压整个项目，在新位置再运行一次环境配置即可。参数和历史页用法见[工作台使用说明](docs/platform_runbook.md)。
 
 ## 训练与数据来源
 
