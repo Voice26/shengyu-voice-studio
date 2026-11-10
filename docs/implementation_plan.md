@@ -1,12 +1,31 @@
-# 实施范围和进度
+# 音色训练流程
 
-最初按用户要求完成项目框架搭建和 GTSinger 数据下载，不逐次执行手册中的暂停指令。用户后续授权上传 voice-gpu、配置环境并运行训练/测试和估算预算，已扩展到服务器执行。
+公开目标音色使用 GTSinger 中文歌手 `ZH-Alto-1`。个人音色使用各自独立的实验目录。三者都采用 RVC v2、40 kHz 和 RMVPE 音高提取。
 
-1. 本地：目录骨架、独立 Python 3.10 数据环境、固定官方 RVC 源码、下载脚本。
-2. 数据：只下载 ZH-Alto-1/Breathy 的 WAV 及许可/README，递归保留原始目录；完成后进行只读音频审计。
-3. 筛选：Control_Group 和 Breathy_Group 为歌唱候选，Paired_Speech_Group 为朗读，排除训练。按完整歌曲留出，复制到平铺训练目录。
-4. Colab：提供固定 RVC commit 的 GPU Notebook；Python 3.12、预训练资源、F0、特征、训练、索引和保存均按单元格运行。
-5. 服务器：已在 `/srv/ai-vocal-clone` 建独立环境，离线安装 135 项依赖，完成数据划分和特征提取，按 batch 实测选择 64，运行到目标 100 epoch 并自动做索引/推理验证。
-6. 后续：源歌手跨音色测试、个人录音和个人模型尚未执行；人工试听未评分。
+## 准备公开数据
 
-验收以真实文件、下载清单、音频审计、训练日志和资源测量为准。不下载其他歌手，不公开数据和模型。
+在项目根目录执行：
+
+```powershell
+.\.venv\Scripts\python.exe scripts/download_gtsinger.py
+.\.venv\Scripts\python.exe scripts/audit_audio.py
+.\.venv\Scripts\python.exe scripts/prepare_gtsinger_dataset.py --holdout-song 水星记 --apply
+```
+
+准备脚本只选择 `Control_Group` 和 `Breathy_Group` 的歌唱录音。按整首歌划分，避免同一首歌的不同乐句同时进入训练与评估。《水星记》留出 24 段，训练集包含其余 462 段，约 64.58 分钟。
+
+## 训练与导出
+
+1. 用 RVC 切分训练录音并重采样，提取 RMVPE 音高和 HuBERT 768 维特征。
+2. 生成 `config.json` 和训练文件清单，训练目标音色。公开模型训练了 100 轮；两版个人模型各训练了 80 轮。
+3. 导出推理权重并为该音色的特征构建检索索引。部署时，权重和索引必须来自同一个实验。
+
+公开模型的 GPU 命令见[上游版本与命令](upstream_versions.md)，实测耗时见[训练报告](../reports/server_training_budget.md)。另有 [Colab Notebook](../notebooks/rvc_public_dataset_training.ipynb)，用于在 Google Drive 保存训练产物。
+
+训练个人音色时，将同一演唱者的 WAV 放在一个目录，在部署了 RVC 的 GPU 服务器运行：
+
+```bash
+.venv/bin/python scripts/train_personal_voice.py my_voice /path/to/recordings --epochs 80
+```
+
+目录内有带伴奏的录音时，可按文件名添加 `--separate '歌曲.wav'`；多个文件分别指定。为新实验使用独立名称，输出位于 `models/<实验名>/`。

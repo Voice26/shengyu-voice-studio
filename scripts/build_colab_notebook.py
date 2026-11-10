@@ -17,7 +17,7 @@ def code(source):
 
 md("""
 # GTSinger 单歌手 RVC 训练框架（Colab）
-本 Notebook 已生成并静态检查，尚未在 Colab/GPU 实际运行。逐单元格执行，禁止无检查地运行全部。
+环境要求为 Python 3.12 和 CUDA GPU。按顺序执行单元格，先检查运行时和数据划分，再开始训练。
 
 1. 本地下载完成并审计后，运行 `scripts/prepare_gtsinger_dataset.py --holdout-song 歌名 --apply`。
 2. 将 `data/processed/`、`scripts/prepare_rvc_config.py`、本 Notebook 上传到自己的 Google Drive `ai-vocal-clone/` 中。
@@ -175,8 +175,8 @@ print('实际生成的索引:', [p.name for p in indices])
 print('保存目录:', SAVE)
 """)
 md("""
-训练后可在本版本 `infer/cli.py --help` 中核对推理参数。推理输入应使用另一位歌手或本人有权使用的人声；当前未下载源歌手测试数据。
-重启 Colab 会丢失 `/content`。如需续训，把 Drive `models/<实验名>/logs/` 中的检查点/配置复制回同一实验目录，重新准备特征后再训练。当前 Notebook 不声称已验证续训或训练效果。
+训练后可用 `python -m infer.cli --help` 查看推理参数，用有权使用的其他歌手录音测试音色转换。
+Colab 重启后会清空 `/content`。续训前，从 Drive 的 `models/<实验名>/logs/` 恢复检查点和配置，再准备同一训练集的特征。此 Notebook 的续训流程尚未在 Colab 实测。
 """)
 
 notebook = dict(nbformat=4, nbformat_minor=5, cells=cells,

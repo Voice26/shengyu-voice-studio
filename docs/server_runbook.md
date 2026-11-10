@@ -2,7 +2,7 @@
 
 ## 部署位置与环境
 
-- 本地 SSH 配置别名：`voice-gpu`（用户口述为 zyjpro6000）。
+- 示例 SSH 别名为 `voice-gpu`，部署时替换为本机配置的别名。
 - 远端项目：`/srv/ai-vocal-clone`。
 - GPU：NVIDIA RTX PRO 6000 Blackwell Workstation Edition，约 96GB 显存。
 - 主机：251GiB 内存、128 个逻辑 CPU；当前 SSH 容器实际限额为 **32GiB 内存、32 核 CPU 配额**，`/dev/shm` 为 32GB。
@@ -18,7 +18,7 @@
 - 留出整首《水星记》：24 条歌唱片段，202.23 秒。
 - 训练：462 条歌唱片段，3874.77 秒（64.58 分钟）。
 - 只训练 Control_Group、Breathy_Group，配对朗读不进入训练。
-- 测试暂为留出目标歌手的技术回归检查，不能据此宣称跨歌手音色转换效果已验证。
+- 留出片段用于检查输出时长和音频格式。跨歌手测试使用另外两位歌手的录音，参数见[测试记录](../reports/cross_speaker_test.md)。
 
 ## 查看任务
 
