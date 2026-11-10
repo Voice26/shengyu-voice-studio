@@ -1,0 +1,8 @@
+{
+  "port": 7866,
+  "ssh_host": "voice-gpu",
+  "remote_root": "/srv/ai-vocal-clone",
+  "max_upload_mb": 80,
+  "max_audio_seconds": 600,
+  "job_timeout_seconds": 1800
+}

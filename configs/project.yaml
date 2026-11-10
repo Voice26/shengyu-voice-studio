@@ -1,0 +1,19 @@
+dataset_repo: GTSinger/GTSinger
+dataset_revision: 4426c862beed558b7e1cb8a4dce7e8c0c83bb208
+target_speaker: ZH-Alto-1
+source_speaker: ZH-Tenor-1
+technique_dir: Breathy
+include_groups:
+- Control_Group
+- Breathy_Group
+exclude_groups:
+- Paired_Speech_Group
+sample_rate: 40000
+model_version: v2
+use_f0: true
+f0_method: rmvpe
+experiment_public: gtsinger_zh_alto
+experiment_personal: my_voice
+holdout_song: 水星记
+upstream_repo: https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI
+upstream_commit: 81eed5e8f68b6bed1789f682fe78cdd324495afc

@@ -1,0 +1,19 @@
+{
+  "repo_id": "baicai1145/pymss",
+  "revision": "f02318ef92c43472777ed7aeeded3d2b29a68b58",
+  "model_type": "bs_roformer",
+  "files": [
+    {
+      "file": "model_bs_roformer_ep_368_sdr_12.9628.ckpt",
+      "bytes": 639317465,
+      "sha256": "f6c94864adfb73bbb0ca58ec14d58dd0b364549e9fb61433ae51916f3e2f8d0b",
+      "repo_path": "vocal/vocal_extraction/model_bs_roformer_ep_368_sdr_12.9628.ckpt"
+    },
+    {
+      "file": "model_bs_roformer_ep_368_sdr_12.9628.yaml",
+      "bytes": 2279,
+      "sha256": "3dae086b481bc6adecccb6bdfd2386ffd78708e11c221876a146972cab5b2afe",
+      "repo_path": "vocal/vocal_extraction/model_bs_roformer_ep_368_sdr_12.9628.yaml"
+    }
+  ]
+}

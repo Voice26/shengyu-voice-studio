@@ -1,0 +1,5 @@
+# Optional local tools for preparing a Linux offline deployment from Windows.
+uv>=0.13,<1
+tomli>=2,<3; python_version < '3.11'
+packaging>=24
+requests>=2.31,<3

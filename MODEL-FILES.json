@@ -1,0 +1,50 @@
+{
+  "models/personal_20261109/personal_20261109.pth": {
+    "bytes": 55228739,
+    "sha256": "c8731b1ab80b97ab3c5c8f87fb66004c545d4c3b29f60d192045f1fc4c64949f"
+  },
+  "models/personal_20261109/voice.index": {
+    "bytes": 71603979,
+    "sha256": "86384011b0d4a33f004fa9f7e159f84a8cf079b0d82f4a15945576dd880da77b"
+  },
+  "models/personal_20261109/voice_profile.json": {
+    "bytes": 217,
+    "sha256": "2337288f6a0767e408f215c5b39072dd0d938c3715d38fed5fb462cde4b2122d"
+  },
+  "models/personal_20261110/personal_20261110.pth": {
+    "bytes": 55228739,
+    "sha256": "b6874658778e70d77fe9292248de66e7443106aed90a0bb6277c311c9d0885c2"
+  },
+  "models/personal_20261110/voice.index": {
+    "bytes": 137374299,
+    "sha256": "892d0c08e6645c1d854167a2eec5c9cee6e94c82e73802c2c91f92ced762f317"
+  },
+  "models/personal_20261110/voice_profile.json": {
+    "bytes": 217,
+    "sha256": "78b6be2ef0fe9cbd26d6409022de8e24929c3ea9744545284cb029307e36a9e1"
+  },
+  "models/gtsinger_zh_alto/added_IVF4777_Flat_nprobe_1_gtsinger_zh_alto_v2.index": {
+    "bytes": 588615859,
+    "sha256": "6b62e221232d11419b0be9737563d0f417dcca5f23b761a5c11f94371db34509"
+  },
+  "models/gtsinger_zh_alto/config.json": {
+    "bytes": 1262,
+    "sha256": "340a67aa8acdbeb701d5e87318ecf56b23893117021eefcdc077d5b06d720a4a"
+  },
+  "models/gtsinger_zh_alto/gtsinger_zh_alto.pth": {
+    "bytes": 55228276,
+    "sha256": "ab4d35055f66b7b133c9f029d25f8d6ca97a90af8a6f0137033c1e1c0778e975"
+  },
+  "models/gtsinger_zh_alto/voice_profile.json": {
+    "bytes": 210,
+    "sha256": "97a13543fb73b400b08a44c03b89f9a235433d35159ed4c52ba9f5a312652216"
+  },
+  "models/separation/model_bs_roformer_ep_368_sdr_12.9628.ckpt": {
+    "bytes": 639317465,
+    "sha256": "f6c94864adfb73bbb0ca58ec14d58dd0b364549e9fb61433ae51916f3e2f8d0b"
+  },
+  "models/separation/model_bs_roformer_ep_368_sdr_12.9628.yaml": {
+    "bytes": 2279,
+    "sha256": "3dae086b481bc6adecccb6bdfd2386ffd78708e11c221876a146972cab5b2afe"
+  }
+}
