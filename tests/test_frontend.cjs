@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
 const code=fs.readFileSync('platform_app/static/app.js','utf8').replace('updateSettings();init();','updateSettings();');
-function harness(url='/'){
+function harness(url='/', browserLanguage='zh-CN', savedLanguage=null){
   const elements=new Map(),radios=[],scheduled=[];
   const location=new URL(url,'http://localhost');
   const history={replaceState(_state,_title,path){location.href=new URL(path,location).href;},
@@ -22,15 +22,59 @@ function harness(url='/'){
   for(const [id,value] of Object.entries({pitch:'0',indexRate:'.75',protect:'.33',rmsMix:'1',historyFilter:'all'}))get(id).value=value;
   get('autoPitch').checked=get('pauseCleanup').checked=true;
   for(const value of ['song','vocals']){const radio=element();radio.value=value;let checked=value==='song';Object.defineProperty(radio,'checked',{get:()=>checked,set:v=>{if(v)radios.filter(x=>x!==radio).forEach(x=>x.checked=false);checked=v;}});radios.push(radio);}
-  const context=vm.createContext({document:{hidden:false,getElementById:get,createElement:element,addEventListener(){},
+  const stored=new Map(savedLanguage?[['shengyu-language',savedLanguage]]:[]);
+  const context=vm.createContext({document:{hidden:false,documentElement:{lang:'zh-CN'},getElementById:get,createElement:element,addEventListener(){},
     querySelector(sel){return sel.includes(':checked')?radios.find(x=>x.checked):radios.find(x=>sel.includes(`value="${x.value}"`));},
     querySelectorAll(sel){if(sel==='[name="sourceType"]')return radios;if(sel==='#completedResult audio')return [get('resultPlayer'),get('mixPlayer')];if(sel==='.history-row')return get('historyList').children;return [];},},
     window:{addEventListener(){},scrollTo(){}},location,history,setTimeout(fn,ms){scheduled.push(ms);return scheduled.length;},clearTimeout(){},
+    navigator:{language:browserLanguage},URLSearchParams,
+    localStorage:{getItem:key=>stored.get(key)||null,setItem:(key,value)=>stored.set(key,value)},
     fetch:async()=>{throw new Error('Network disabled in test');},AbortController,console,XMLHttpRequest:class{open(){} setRequestHeader(){} upload={}; send(){context.request=this;}}});
   vm.runInContext(code,context);
   return {run:s=>vm.runInContext(s,context),get,radios,scheduled,context};
 }
 const job=(id,status)=>({id,status,name:id,created_at:'2026-11-08T00:00:00Z',updated_at:'1',settings:{pitch:0,index_rate:.75},report:{},message:'正在转换',input_url:'/api/audio/sample/male'});
+
+test('explicit language overrides saved and browser preferences on direct history links',()=>{
+  const explicit=harness('/history?lang=en','zh-CN','zh');
+  assert.equal(explicit.context.document.documentElement.lang,'en');
+  assert.equal(explicit.get('pageName').textContent,'Recent results');
+  assert.equal(harness('/','en-HK','zh').context.document.documentElement.lang,'zh-CN');
+  assert.equal(harness('/','en-HK').context.document.documentElement.lang,'en');
+});
+
+test('switching language preserves the selected audio, parameters and history filter',()=>{
+  const h=harness();
+  h.context.fixture=[job('old','completed')];
+  h.run("state.models=[{id:legacyVoice,name:'清柔女声',reference_seconds:1,pitch_analysis:true}];state.jobs=fixture;state.source={name:'个人录音.wav',url:'/draft'};error('文件上传不完整，请重试')");
+  h.get('voiceSelect').value='gtsinger_zh_alto';
+  h.get('pitch').value='3';
+  h.get('historyFilter').value='completed';
+  h.run("setLanguage('en')");
+  assert.equal(h.get('pitch').value,'3');
+  assert.equal(h.get('pitchValue').textContent,'+3 semitones');
+  assert.equal(h.get('historyFilter').value,'completed');
+  assert.equal(h.run('state.source.url'),'/draft');
+  assert.equal(h.get('sourceName').textContent,'个人录音.wav');
+  assert.equal(h.get('pageError').textContent,'The upload was incomplete. Please try again.');
+  assert.equal(h.get('historyList').children[0].children[3].textContent,'Listen');
+  h.run("navigate('history')");
+  assert.equal(h.context.location.search,'?lang=en');
+  h.run("setLanguage('zh')");
+  assert.equal(h.get('pageError').textContent,'文件上传不完整，请重试');
+  assert.equal(h.get('historyList').children[0].children[3].textContent,'试听');
+});
+
+test('an existing failed result translates when language changes without retrying the task',()=>{
+  const h=harness('/history');
+  const failed=job('failed','failed');
+  failed.message='音频时长需在 0.2 秒到 10 分钟之间';
+  h.context.failed=failed;
+  h.run("state.jobs=[failed];showJob(failed,'history');setLanguage('en')");
+  assert.equal(h.get('failureMessage').textContent,'Audio must be between 0.2 seconds and 10 minutes.');
+  assert.equal(h.get('resultBadge').textContent,'Failed');
+  assert.equal(h.run('state.jobs[0].status'),'failed');
+});
 test('direct and bookmarked history links open only the history list',()=>{
   for(const url of ['/history','/history/','/?q=test#history']){
     const h=harness(url);

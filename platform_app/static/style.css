@@ -449,3 +449,28 @@ audio::-webkit-media-controls-panel { background: #f0f3ef; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
+
+
+/* The language control remains available on compact screens. */
+.language-switch { display: flex; flex-shrink: 0; border: 1px solid var(--line); border-radius: 8px; padding: 3px; gap: 2px; background: #fff; }
+.language-switch button { border: 0; border-radius: 5px; padding: 5px 9px; background: transparent; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.language-switch button[aria-pressed="true"] { background: var(--mint); color: var(--green-dark); font-weight: 600; }
+.language-switch button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.topbar { height: auto; min-height: 62px; padding-top: 10px; padding-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+.advanced summary > .i18n-text { font: inherit; color: inherit; margin-left: 0; }
+html[lang="en"] .card-heading { flex-wrap: wrap; }
+html[lang="en"] .process-steps { flex-wrap: wrap; }
+html[lang="en"] .reference-heading { align-items: flex-start; }
+html[lang="en"] .reference-heading > span { min-width: 0; }
+html[lang="en"] .cleanup-option small { line-height: 1.6; }
+@media (max-width: 520px) {
+  .topbar > span { display: none; }
+  .topbar-right { width: 100%; }
+  .language-switch { margin-left: auto; }
+  html[lang="en"] .sidebar { gap: 6px; }
+  html[lang="en"] .brand { font-size: 17px; }
+  html[lang="en"] .nav-item { font-size: 11px; padding: 7px; }
+  html[lang="en"] .action-strip { flex-wrap: wrap; }
+  html[lang="en"] .action-strip > div { flex-basis: 100%; }
+  html[lang="en"] .action-strip .primary-button { width: 100%; }
+}

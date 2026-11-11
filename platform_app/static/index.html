@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#19594d">
-  <title>声屿 · 本地换声工作台</title>
+  <title data-i18n="声屿 · 本地换声工作台">声屿 · 本地换声工作台</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/style.css">
-  <script src="/app.js" defer></script>
+  <link rel="stylesheet" href="/style.css?v=bilingual-1">
+  <script src="/app.js?v=bilingual-1" defer></script>
 </head>
 <body>
-<a class="skip-link" href="#mainContent">跳转到主要内容</a>
+<a class="skip-link" href="#mainContent"><span class="i18n-text" data-i18n="跳转到主要内容">跳转到主要内容</span></a>
 <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
   <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 10v4m4-8v12m4-16v20m4-16v12m4-8v4"/></symbol>
@@ -26,86 +26,86 @@
 </svg>
 
 <aside class="sidebar">
-  <a class="brand" href="/" data-page="workspace" aria-label="声屿首页"><span class="brand-icon"><svg><use href="#i-wave"/></svg></span><span>声屿<span class="brand-english">VOICE STUDIO</span></span></a>
-  <div class="nav-caption">工作空间</div>
-  <nav aria-label="主导航">
-    <a class="nav-item" href="/" data-page="workspace" aria-label="换声工作台"><svg><use href="#i-wave"/></svg>换声工作台<span class="nav-dot"></span></a>
-    <a class="nav-item" href="/history" data-page="history" aria-label="最近生成"><svg><use href="#i-clock"/></svg>最近生成<span id="historyCount" class="nav-count">0</span></a>
+  <a class="brand" href="/" data-page="workspace" aria-label="声屿首页" data-i18n-aria-label="声屿首页"><span class="brand-icon"><svg><use href="#i-wave"/></svg></span><span><span class="i18n-text" data-i18n="声屿">声屿</span><span class="brand-english">VOICE STUDIO</span></span></a>
+  <div class="nav-caption"><span class="i18n-text" data-i18n="工作空间">工作空间</span></div>
+  <nav aria-label="主导航" data-i18n-aria-label="主导航">
+    <a class="nav-item" href="/" data-page="workspace" aria-label="换声工作台" data-i18n-aria-label="换声工作台"><svg><use href="#i-wave"/></svg><span class="i18n-text" data-i18n="换声工作台">换声工作台</span><span class="nav-dot"></span></a>
+    <a class="nav-item" href="/history" data-page="history" aria-label="最近生成" data-i18n-aria-label="最近生成"><svg><use href="#i-clock"/></svg><span class="i18n-text" data-i18n="最近生成">最近生成</span><span id="historyCount" class="nav-count">0</span></a>
   </nav>
   <div class="sidebar-bottom">
-    <div class="local-label"><span class="dot"></span>本地工作空间</div>
-    <p>免登录，本机保存结果。<br>换声使用服务器 GPU。</p>
+    <div class="local-label"><span class="dot"></span><span id="workspaceLocation"><span class="i18n-text" data-i18n="本地工作空间">本地工作空间</span></span></div>
+    <p><span id="storageIntro"><span class="i18n-text" data-i18n="免登录，本机保存结果。">免登录，本机保存结果。</span></span><br><span id="modeIntro"><span class="i18n-text" data-i18n="换声使用服务器 GPU。">换声使用服务器 GPU。</span></span></p>
     <div class="version">RVC v2 <span>·</span> 40 kHz</div>
   </div>
 </aside>
 
 <div class="app-shell">
-  <header class="topbar"><span>工作空间 <span class="slash">/</span> <strong id="pageName">声音转换</strong></span><div class="topbar-right"><span id="connectionBadge" class="connection checking"><span class="dot"></span><span id="connectionText">正在连接 GPU</span></span><button id="refreshConnection" class="icon-button" title="重新检查连接" aria-label="重新检查连接"><svg><use href="#i-refresh"/></svg></button></div></header>
+  <header class="topbar"><span><span class="i18n-text" data-i18n="工作空间">工作空间</span> <span class="slash">/</span> <strong id="pageName"><span class="i18n-text" data-i18n="声音转换">声音转换</span></strong></span><div class="topbar-right"><span id="connectionBadge" class="connection checking"><span class="dot"></span><span id="connectionText"><span class="i18n-text" data-i18n="正在检查环境">正在检查环境</span></span></span><button id="refreshConnection" class="icon-button" title="重新检查连接" aria-label="重新检查连接" data-i18n-title="重新检查连接" data-i18n-aria-label="重新检查连接"><svg><use href="#i-refresh"/></svg></button><div class="language-switch" role="group" aria-label="界面语言 / Interface language"><button type="button" data-language="zh" lang="zh-CN" aria-pressed="true">中文</button><button type="button" data-language="en" lang="en" aria-pressed="false">English</button></div></div></header>
   <main id="mainContent" tabindex="-1">
-    <p id="syncNotice" class="notice" role="status" hidden>任务状态暂时无法同步，正在自动重连。请保留本地服务运行。</p>
+    <p id="syncNotice" class="notice" role="status" hidden><span class="i18n-text" data-i18n="任务状态暂时无法同步，正在自动重连。请保持网络连接。">任务状态暂时无法同步，正在自动重连。请保持网络连接。</span></p>
     <div id="pageError" class="notice error" role="alert" hidden></div>
     <div id="workspace" hidden>
-    <section class="page-heading"><div><div class="eyebrow">VOICE WORKSPACE</div><h1 id="workspaceHeading" tabindex="-1">声音转换</h1><p>导入歌曲或人声，转换音色，试听并下载。</p></div><a class="workspace-tag" href="/history" data-page="history"><svg><use href="#i-folder"/></svg>查看最近生成<svg><use href="#i-arrow"/></svg></a></section>
+    <section class="page-heading"><div><div class="eyebrow">VOICE WORKSPACE</div><h1 id="workspaceHeading" tabindex="-1"><span class="i18n-text" data-i18n="声音转换">声音转换</span></h1><p><span class="i18n-text" data-i18n="导入歌曲或人声，转换音色，试听并下载。">导入歌曲或人声，转换音色，试听并下载。</span></p></div><a class="workspace-tag" href="/history" data-page="history"><svg><use href="#i-folder"/></svg><span class="i18n-text" data-i18n="查看最近生成">查看最近生成</span><svg><use href="#i-arrow"/></svg></a></section>
 
-    <div id="activeTask" class="active-task" hidden><span class="task-dot"></span><div><strong id="activeTaskCount"></strong><span id="activeTaskText"></span></div><button id="viewActiveTask" class="text-button">查看进度</button></div>
+    <div id="activeTask" class="active-task" hidden><span class="task-dot"></span><div><strong id="activeTaskCount"></strong><span id="activeTaskText"></span></div><button id="viewActiveTask" class="text-button"><span class="i18n-text" data-i18n="查看进度">查看进度</span></button></div>
     <div class="workspace-grid">
       <section class="card source-card" aria-labelledby="sourceHeading">
-        <div class="card-heading"><h2 id="sourceHeading"><span class="step-number">1</span>导入音频</h2><span class="small-muted">歌曲或干声均可</span></div>
-        <fieldset class="input-mode"><legend>音频类型</legend><label><input type="radio" name="sourceType" value="song" checked><span>带伴奏歌曲<small>先分离人声与伴奏</small></span></label><label><input type="radio" name="sourceType" value="vocals"><span>纯人声 / 干声<small>直接转换，处理更快</small></span></label></fieldset>
-        <label id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="选择或拖入音频文件">
+        <div class="card-heading"><h2 id="sourceHeading"><span class="step-number">1</span><span class="i18n-text" data-i18n="导入音频">导入音频</span></h2><span class="small-muted"><span class="i18n-text" data-i18n="歌曲或干声均可">歌曲或干声均可</span></span></div>
+        <fieldset class="input-mode"><legend><span class="i18n-text" data-i18n="音频类型">音频类型</span></legend><label><input type="radio" name="sourceType" value="song" checked><span><span class="i18n-text" data-i18n="带伴奏歌曲">带伴奏歌曲</span><small><span class="i18n-text" data-i18n="先分离人声与伴奏">先分离人声与伴奏</span></small></span></label><label><input type="radio" name="sourceType" value="vocals"><span><span class="i18n-text" data-i18n="纯人声 / 干声">纯人声 / 干声</span><small><span class="i18n-text" data-i18n="直接转换，处理更快">直接转换，处理更快</span></small></span></label></fieldset>
+        <label id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="选择或拖入音频文件" data-i18n-aria-label="选择或拖入音频文件">
           <input id="fileInput" type="file" accept=".wav,.mp3,.flac,.m4a,.ogg,.aac,.wma,.opus" hidden>
           <span class="upload-icon"><svg><use href="#i-upload"/></svg></span>
-          <strong>将音频拖到这里</strong>
-          <span class="choose-file">选择音频文件</span>
+          <strong><span class="i18n-text" data-i18n="将音频拖到这里">将音频拖到这里</span></strong>
+          <span class="choose-file"><span class="i18n-text" data-i18n="选择音频文件">选择音频文件</span></span>
           <span class="drop-description">WAV / MP3 / FLAC / M4A / OGG</span>
-          <span class="drop-limit">单个文件最大 80 MB · 最长 10 分钟</span>
+          <span class="drop-limit"><span class="i18n-text" data-i18n="单个文件最大 80 MB · 最长 10 分钟">单个文件最大 80 MB · 最长 10 分钟</span></span>
         </label>
-        <div id="uploadProgress" class="upload-progress" hidden><span id="uploadText">正在导入…</span><progress id="uploadBar" max="100" value="0" aria-label="文件上传进度"></progress></div>
-        <div id="selectedSource" class="selected-source" hidden><div class="file-row"><span class="file-icon"><svg><use href="#i-mic"/></svg></span><div class="file-details"><strong id="sourceName"></strong><span id="sourceMeta"></span></div><button id="clearSource" class="text-button">移除</button></div><canvas id="waveform" aria-label="原始音频波形"></canvas><audio id="sourcePlayer" controls preload="metadata" aria-label="原始人声试听"></audio><p id="sourcePlaybackNotice" class="input-tip" hidden>浏览器暂时无法预览此格式，转换成功后可试听标准 WAV 版本。</p></div>
-        <div class="example-title"><span>先用示例试一试</span><span class="small-muted">已准备好的干声</span></div>
-        <div class="examples"><button class="example-button" id="maleExample" data-sample="male"><span class="example-avatar male">男</span><span><strong>男声示例</strong><small>平凡的一天 · 18.6s</small></span><svg><use href="#i-arrow"/></svg></button><button class="example-button" id="femaleExample" data-sample="female"><span class="example-avatar female">女</span><span><strong>女声示例</strong><small>Safe and Sound · 24.2s</small></span><svg><use href="#i-arrow"/></svg></button></div>
-        <p class="input-tip">有乐器、伴奏时请选择“带伴奏歌曲”。示例已是干声。</p>
+        <div id="uploadProgress" class="upload-progress" hidden><span id="uploadText"><span class="i18n-text" data-i18n="正在导入…">正在导入…</span></span><progress id="uploadBar" max="100" value="0" aria-label="文件上传进度" data-i18n-aria-label="文件上传进度"></progress></div>
+        <div id="selectedSource" class="selected-source" hidden><div class="file-row"><span class="file-icon"><svg><use href="#i-mic"/></svg></span><div class="file-details"><strong id="sourceName"></strong><span id="sourceMeta"></span></div><button id="clearSource" class="text-button"><span class="i18n-text" data-i18n="移除">移除</span></button></div><canvas id="waveform" aria-label="原始音频波形" data-i18n-aria-label="原始音频波形"></canvas><audio id="sourcePlayer" controls preload="metadata" aria-label="原始人声试听" data-i18n-aria-label="原始人声试听"></audio><p id="sourcePlaybackNotice" class="input-tip" hidden><span class="i18n-text" data-i18n="浏览器暂时无法预览此格式，转换成功后可试听标准 WAV 版本。">浏览器暂时无法预览此格式，转换成功后可试听标准 WAV 版本。</span></p></div>
+        <div class="example-title"><span><span class="i18n-text" data-i18n="先用示例试一试">先用示例试一试</span></span><span class="small-muted"><span class="i18n-text" data-i18n="已准备好的干声">已准备好的干声</span></span></div>
+        <div class="examples"><button class="example-button" id="maleExample" data-sample="male"><span class="example-avatar male"><span class="i18n-text" data-i18n="男">男</span></span><span><strong><span class="i18n-text" data-i18n="男声示例">男声示例</span></strong><small><span class="i18n-text" data-i18n="平凡的一天 · 18.6s">平凡的一天 · 18.6s</span></small></span><svg><use href="#i-arrow"/></svg></button><button class="example-button" id="femaleExample" data-sample="female"><span class="example-avatar female"><span class="i18n-text" data-i18n="女">女</span></span><span><strong><span class="i18n-text" data-i18n="女声示例">女声示例</span></strong><small>Safe and Sound · 24.2s</small></span><svg><use href="#i-arrow"/></svg></button></div>
+        <p class="input-tip"><span class="i18n-text" data-i18n="有乐器、伴奏时请选择“带伴奏歌曲”。示例已是干声。">有乐器、伴奏时请选择“带伴奏歌曲”。示例已是干声。</span></p>
       </section>
 
       <section class="card voice-card" aria-labelledby="voiceHeading">
-        <div class="card-heading"><h2 id="voiceHeading"><span class="step-number">2</span>目标音色与参数</h2><span id="voiceStatus" class="pill">正在读取</span></div>
-        <div class="voice-identity"><div class="voice-art" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="voice-choice"><select id="voiceSelect" aria-label="选择目标音色" disabled></select><p id="voiceDescription"></p></div></div>
-        <div class="reference-heading"><span>目标原声试听</span><span id="referenceTitle"></span></div>
-        <audio id="targetPlayer" controls preload="metadata" aria-label="目标音色原声试听"></audio>
+        <div class="card-heading"><h2 id="voiceHeading"><span class="step-number">2</span><span class="i18n-text" data-i18n="目标音色与参数">目标音色与参数</span></h2><span id="voiceStatus" class="pill"><span class="i18n-text" data-i18n="正在读取">正在读取</span></span></div>
+        <div class="voice-identity"><div class="voice-art" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="voice-choice"><select id="voiceSelect" aria-label="选择目标音色" disabled data-i18n-aria-label="选择目标音色"></select><p id="voiceDescription"></p></div></div>
+        <div class="reference-heading"><span><span class="i18n-text" data-i18n="目标原声试听">目标原声试听</span></span><span id="referenceTitle"></span></div>
+        <audio id="targetPlayer" controls preload="metadata" aria-label="目标音色原声试听" data-i18n-aria-label="目标音色原声试听"></audio>
         <div class="divider"></div>
-        <div class="settings-heading"><h3>换声参数</h3><button id="resetSettings" class="text-button">恢复默认</button></div>
-        <label class="cleanup-option pitch-option" for="autoPitch"><input id="autoPitch" type="checkbox" checked><span><strong>自动适配目标音区</strong><small>分析人声音高，按需升降八度；下方可手动微调</small></span></label>
-        <div class="setting"><label for="pitch">音高调整 <span id="pitchHelp" class="help-text">在自动建议上额外调整</span></label><output id="pitchValue" for="pitch">0 半音</output><input id="pitch" type="range" min="-12" max="12" step="1" value="0"><div class="range-labels"><span>−12</span><span id="pitchCenter">不额外调整</span><span>+12</span></div></div>
-        <p id="pitchNotice" class="pitch-notice" hidden>人声会额外变调，伴奏保持原调；整曲试听时留意是否和谐。</p>
-        <div class="setting"><label for="indexRate">目标音色融合 <span class="help-text">越高越偏向目标音色</span></label><output id="indexValue" for="indexRate">75%</output><input id="indexRate" type="range" min="0" max="1" step="0.05" value="0.75"></div>
-        <label class="cleanup-option" for="pauseCleanup"><input id="pauseCleanup" type="checkbox" checked><span><strong>静音与起音优化</strong><small>柔和降低停顿杂音，保护轻声和人声边界</small></span></label>
-        <details class="advanced"><summary>高级设置 <span>辅音保护、音量包络</span></summary><div class="setting"><label for="protect">辅音保护 <span class="help-text">越低保护越强，0.5 关闭</span></label><output id="protectValue" for="protect">0.33</output><input id="protect" type="range" min="0" max="0.5" step="0.01" value="0.33"></div><div class="setting"><label for="rmsMix">音量包络 <span class="help-text">0 跟随原声，1 使用生成音量</span></label><output id="rmsValue" for="rmsMix">1.00</output><input id="rmsMix" type="range" min="0" max="1" step="0.05" value="1"></div></details>
+        <div class="settings-heading"><h3><span class="i18n-text" data-i18n="换声参数">换声参数</span></h3><button id="resetSettings" class="text-button"><span class="i18n-text" data-i18n="恢复默认">恢复默认</span></button></div>
+        <label class="cleanup-option pitch-option" for="autoPitch"><input id="autoPitch" type="checkbox" checked><span><strong><span class="i18n-text" data-i18n="自动适配目标音区">自动适配目标音区</span></strong><small><span class="i18n-text" data-i18n="分析人声音高，按需升降八度；下方可手动微调">分析人声音高，按需升降八度；下方可手动微调</span></small></span></label>
+        <div class="setting"><label for="pitch"><span class="i18n-text" data-i18n="音高调整">音高调整</span> <span id="pitchHelp" class="help-text"><span class="i18n-text" data-i18n="在自动建议上额外调整">在自动建议上额外调整</span></span></label><output id="pitchValue" for="pitch"><span class="i18n-text" data-i18n="0 半音">0 半音</span></output><input id="pitch" type="range" min="-12" max="12" step="1" value="0"><div class="range-labels"><span>−12</span><span id="pitchCenter"><span class="i18n-text" data-i18n="不额外调整">不额外调整</span></span><span>+12</span></div></div>
+        <p id="pitchNotice" class="pitch-notice" hidden><span class="i18n-text" data-i18n="人声会额外变调，伴奏保持原调；整曲试听时留意是否和谐。">人声会额外变调，伴奏保持原调；整曲试听时留意是否和谐。</span></p>
+        <div class="setting"><label for="indexRate"><span class="i18n-text" data-i18n="目标音色融合">目标音色融合</span> <span class="help-text"><span class="i18n-text" data-i18n="越高越偏向目标音色">越高越偏向目标音色</span></span></label><output id="indexValue" for="indexRate">75%</output><input id="indexRate" type="range" min="0" max="1" step="0.05" value="0.75"></div>
+        <label class="cleanup-option" for="pauseCleanup"><input id="pauseCleanup" type="checkbox" checked><span><strong><span class="i18n-text" data-i18n="静音与起音优化">静音与起音优化</span></strong><small><span class="i18n-text" data-i18n="柔和降低停顿杂音，保护轻声和人声边界">柔和降低停顿杂音，保护轻声和人声边界</span></small></span></label>
+        <details class="advanced"><summary><span class="i18n-text" data-i18n="高级设置">高级设置</span> <span><span class="i18n-text" data-i18n="辅音保护、音量包络">辅音保护、音量包络</span></span></summary><div class="setting"><label for="protect"><span class="i18n-text" data-i18n="辅音保护">辅音保护</span> <span class="help-text"><span class="i18n-text" data-i18n="越低保护越强，0.5 关闭">越低保护越强，0.5 关闭</span></span></label><output id="protectValue" for="protect">0.33</output><input id="protect" type="range" min="0" max="0.5" step="0.01" value="0.33"></div><div class="setting"><label for="rmsMix"><span class="i18n-text" data-i18n="音量包络">音量包络</span> <span class="help-text"><span class="i18n-text" data-i18n="0 跟随原声，1 使用生成音量">0 跟随原声，1 使用生成音量</span></span></label><output id="rmsValue" for="rmsMix">1.00</output><input id="rmsMix" type="range" min="0" max="1" step="0.05" value="1"></div></details>
       </section>
 
-      <section class="action-strip"><div><svg><use href="#i-spark"/></svg><span id="actionHint">导入一段人声，就可以开始了</span></div><button id="convertButton" class="primary-button" disabled><span id="convertText">开始换声</span><svg><use href="#i-arrow"/></svg></button></section>
+      <section class="action-strip"><div><svg><use href="#i-spark"/></svg><span id="actionHint"><span class="i18n-text" data-i18n="导入一段人声，就可以开始了">导入一段人声，就可以开始了</span></span></div><button id="convertButton" class="primary-button" disabled><span id="convertText"><span class="i18n-text" data-i18n="开始换声">开始换声</span></span><svg><use href="#i-arrow"/></svg></button></section>
 
     </div>
     </div>
     <section id="history" aria-labelledby="historyHeading" hidden>
-      <div class="page-heading"><div><h1 id="historyHeading" tabindex="-1">最近生成</h1><p>最近 50 条换声记录保存在本机，可随时试听和下载。</p></div></div>
+      <div class="page-heading"><div><h1 id="historyHeading" tabindex="-1"><span class="i18n-text" data-i18n="最近生成">最近生成</span></h1><p id="historyLocation"><span class="i18n-text" data-i18n="最近 50 条换声记录保存在本机，可随时试听和下载。">最近 50 条换声记录保存在本机，可随时试听和下载。</span></p></div></div>
       <div class="history-toolbar">
-        <label class="history-search"><svg><use href="#i-search"/></svg><input id="historySearch" type="search" placeholder="搜索音频名称…" aria-label="搜索转换记录" autocomplete="off"></label>
-        <select id="historyFilter" aria-label="筛选任务状态"><option value="all">全部状态</option><option value="completed">已完成</option><option value="active">处理中</option><option value="failed">未完成</option></select>
+        <label class="history-search"><svg><use href="#i-search"/></svg><input id="historySearch" type="search" placeholder="搜索音频名称…" aria-label="搜索转换记录" autocomplete="off" data-i18n-placeholder="搜索音频名称…" data-i18n-aria-label="搜索转换记录"></label>
+        <select id="historyFilter" aria-label="筛选任务状态" data-i18n-aria-label="筛选任务状态"><option value="all" data-i18n="全部状态">全部状态</option><option value="completed" data-i18n="已完成">已完成</option><option value="active" data-i18n="处理中">处理中</option><option value="failed" data-i18n="未完成">未完成</option></select>
       </div>
       <div class="card history-card">
-        <div id="historyEmpty" class="history-empty" hidden><svg><use href="#i-folder"/></svg><span>还没有转换记录。</span><a href="/" data-page="workspace" class="text-button">去工作台试试</a></div>
-        <div id="historyNoMatch" class="history-empty" hidden>没有符合条件的记录，试试其他名称或状态。</div>
+        <div id="historyEmpty" class="history-empty" hidden><svg><use href="#i-folder"/></svg><span><span class="i18n-text" data-i18n="还没有转换记录。">还没有转换记录。</span></span><a href="/" data-page="workspace" class="text-button"><span class="i18n-text" data-i18n="去工作台试试">去工作台试试</span></a></div>
+        <div id="historyNoMatch" class="history-empty" hidden><span class="i18n-text" data-i18n="没有符合条件的记录，试试其他名称或状态。">没有符合条件的记录，试试其他名称或状态。</span></div>
         <div id="historyList"></div>
       </div>
-      <div class="history-pagination"><span id="historyShown"></span><button id="historyMore" class="secondary-button small" hidden>显示更多记录</button></div>
+      <div class="history-pagination"><span id="historyShown"></span><button id="historyMore" class="secondary-button small" hidden><span class="i18n-text" data-i18n="显示更多记录">显示更多记录</span></button></div>
     </section>
-      <section id="resultPanel" class="card result-card" aria-labelledby="resultHeading" hidden><div class="card-heading"><h2 id="resultHeading" tabindex="-1"><span id="resultStep" class="step-number">3</span><span id="resultTitle">试听转换结果</span></h2><span id="resultBadge" class="pill">等待生成</span></div>
-        <div id="emptyResult" class="result-empty"><span class="empty-wave"><svg><use href="#i-wave"/></svg></span><strong>转换结果会显示在这里</strong><p>完成后可试听、比较原声并下载音频。</p></div>
-        <div id="processingResult" class="processing-result" hidden><div class="process-visual"><span></span><span></span><span></span><span></span><span></span></div><strong id="processingMessage" role="status" aria-live="polite">正在准备转换</strong><p id="processingMeta">音频较长时需要更多时间，请保持服务运行。</p><ol class="process-steps"><li data-step="uploading">发送音频</li><li data-step="separating">分离伴奏</li><li data-step="analyzing">分析音区</li><li data-step="converting">转换人声</li><li data-step="mixing">合成整曲</li><li data-step="downloading">回传结果</li></ol></div>
-        <div id="failedResult" class="failed-result" hidden><strong>这次转换没有完成</strong><p id="failureMessage"></p><button id="retryButton" class="secondary-button">使用相同参数重试</button><details><summary>查看任务日志</summary><pre id="failureLog"></pre></details></div>
-        <div id="completedResult" hidden><div class="result-summary"><span class="success-icon"><svg><use href="#i-check"/></svg></span><div><strong id="resultName">转换完成</strong><span id="resultMeta"></span></div></div><p id="analysisSummary" class="analysis-summary" hidden></p><div class="players-grid"><div><label id="resultSourceLabel">原始人声</label><audio id="resultSourcePlayer" controls preload="metadata" aria-label="结果中的原始人声"></audio><a id="downloadSource" class="text-button" download hidden>下载分离人声 WAV</a></div><div><label>目标人声 <span class="pill soft-green">转换结果</span></label><audio id="resultPlayer" controls preload="metadata" aria-label="转换结果试听"></audio></div></div><div class="comparison-row"><div><strong>人声音量匹配对比</strong><span>输入人声 → 1 秒静音 → 转换人声</span></div><audio id="comparisonPlayer" controls preload="metadata" aria-label="音量匹配对比试听"></audio></div><details id="separationResults" class="stem-results" open hidden><summary>伴奏与整曲试听</summary><div class="players-grid"><div><label>原伴奏</label><audio id="instrumentalPlayer" controls preload="metadata" aria-label="分离后的伴奏试听"></audio><a id="downloadInstrumental" class="text-button" download>下载伴奏 WAV</a></div><div><label>目标人声 + 原伴奏</label><audio id="mixPlayer" controls preload="metadata" aria-label="带伴奏换声结果试听"></audio></div></div></details><div class="result-settings"><span id="resultParams"></span><button id="reuseSource" class="text-button">复用此音频与参数</button></div><div class="result-actions"><a id="downloadResult" class="primary-button small" download><svg><use href="#i-download"/></svg>下载换声人声</a><a id="downloadMix" class="primary-button small" download hidden><svg><use href="#i-download"/></svg>下载带伴奏版</a><a id="downloadComparison" class="secondary-button small" download>下载对比</a></div></div>
+      <section id="resultPanel" class="card result-card" aria-labelledby="resultHeading" hidden><div class="card-heading"><h2 id="resultHeading" tabindex="-1"><span id="resultStep" class="step-number">3</span><span id="resultTitle"><span class="i18n-text" data-i18n="试听转换结果">试听转换结果</span></span></h2><span id="resultBadge" class="pill"><span class="i18n-text" data-i18n="等待生成">等待生成</span></span></div>
+        <div id="emptyResult" class="result-empty"><span class="empty-wave"><svg><use href="#i-wave"/></svg></span><strong><span class="i18n-text" data-i18n="转换结果会显示在这里">转换结果会显示在这里</span></strong><p><span class="i18n-text" data-i18n="完成后可试听、比较原声并下载音频。">完成后可试听、比较原声并下载音频。</span></p></div>
+        <div id="processingResult" class="processing-result" hidden><div class="process-visual"><span></span><span></span><span></span><span></span><span></span></div><strong id="processingMessage" role="status" aria-live="polite"><span class="i18n-text" data-i18n="正在准备转换">正在准备转换</span></strong><p id="processingMeta"><span class="i18n-text" data-i18n="音频较长时需要更多时间，请保持服务运行。">音频较长时需要更多时间，请保持服务运行。</span></p><ol class="process-steps"><li data-step="uploading"><span class="i18n-text" data-i18n="发送音频">发送音频</span></li><li data-step="separating"><span class="i18n-text" data-i18n="分离伴奏">分离伴奏</span></li><li data-step="analyzing"><span class="i18n-text" data-i18n="分析音区">分析音区</span></li><li data-step="converting"><span class="i18n-text" data-i18n="转换人声">转换人声</span></li><li data-step="mixing"><span class="i18n-text" data-i18n="合成整曲">合成整曲</span></li><li data-step="downloading"><span class="i18n-text" data-i18n="回传结果">回传结果</span></li></ol></div>
+        <div id="failedResult" class="failed-result" hidden><strong><span class="i18n-text" data-i18n="这次转换没有完成">这次转换没有完成</span></strong><p id="failureMessage"></p><button id="retryButton" class="secondary-button"><span class="i18n-text" data-i18n="使用相同参数重试">使用相同参数重试</span></button><details><summary><span class="i18n-text" data-i18n="查看任务日志">查看任务日志</span></summary><pre id="failureLog"></pre></details></div>
+        <div id="completedResult" hidden><div class="result-summary"><span class="success-icon"><svg><use href="#i-check"/></svg></span><div><strong id="resultName"><span class="i18n-text" data-i18n="转换完成">转换完成</span></strong><span id="resultMeta"></span></div></div><p id="analysisSummary" class="analysis-summary" hidden></p><div class="players-grid"><div><label id="resultSourceLabel"><span class="i18n-text" data-i18n="原始人声">原始人声</span></label><audio id="resultSourcePlayer" controls preload="metadata" aria-label="结果中的原始人声" data-i18n-aria-label="结果中的原始人声"></audio><a id="downloadSource" class="text-button" download hidden><span class="i18n-text" data-i18n="下载分离人声 WAV">下载分离人声 WAV</span></a></div><div><label><span class="i18n-text" data-i18n="目标人声">目标人声</span> <span class="pill soft-green"><span class="i18n-text" data-i18n="转换结果">转换结果</span></span></label><audio id="resultPlayer" controls preload="metadata" aria-label="转换结果试听" data-i18n-aria-label="转换结果试听"></audio></div></div><div class="comparison-row"><div><strong><span class="i18n-text" data-i18n="人声音量匹配对比">人声音量匹配对比</span></strong><span><span class="i18n-text" data-i18n="输入人声 → 1 秒静音 → 转换人声">输入人声 → 1 秒静音 → 转换人声</span></span></div><audio id="comparisonPlayer" controls preload="metadata" aria-label="音量匹配对比试听" data-i18n-aria-label="音量匹配对比试听"></audio></div><details id="separationResults" class="stem-results" open hidden><summary><span class="i18n-text" data-i18n="伴奏与整曲试听">伴奏与整曲试听</span></summary><div class="players-grid"><div><label><span class="i18n-text" data-i18n="原伴奏">原伴奏</span></label><audio id="instrumentalPlayer" controls preload="metadata" aria-label="分离后的伴奏试听" data-i18n-aria-label="分离后的伴奏试听"></audio><a id="downloadInstrumental" class="text-button" download><span class="i18n-text" data-i18n="下载伴奏 WAV">下载伴奏 WAV</span></a></div><div><label><span class="i18n-text" data-i18n="目标人声 + 原伴奏">目标人声 + 原伴奏</span></label><audio id="mixPlayer" controls preload="metadata" aria-label="带伴奏换声结果试听" data-i18n-aria-label="带伴奏换声结果试听"></audio></div></div></details><div class="result-settings"><span id="resultParams"></span><button id="reuseSource" class="text-button"><span class="i18n-text" data-i18n="复用此音频与参数">复用此音频与参数</span></button></div><div class="result-actions"><a id="downloadResult" class="primary-button small" download><svg><use href="#i-download"/></svg><span class="i18n-text" data-i18n="下载换声人声">下载换声人声</span></a><a id="downloadMix" class="primary-button small" download hidden><svg><use href="#i-download"/></svg><span class="i18n-text" data-i18n="下载带伴奏版">下载带伴奏版</span></a><a id="downloadComparison" class="secondary-button small" download><span class="i18n-text" data-i18n="下载对比">下载对比</span></a></div></div>
       </section>
-    <footer><span class="footer-brand">声屿 <span>Voice Studio</span></span><span>本地访问 · 无需登录 <span class="footer-dot">/</span> 推理通过 SSH 连接你的服务器</span></footer>
+    <footer><span class="footer-brand"><span class="i18n-text" data-i18n="声屿">声屿</span> <span>Voice Studio</span></span><span><span class="i18n-text" data-i18n="无需登录">无需登录</span> <span class="footer-dot">/</span> <span id="modeFooter"><span class="i18n-text" data-i18n="推理通过 SSH 连接你的服务器">推理通过 SSH 连接你的服务器</span></span></span></footer>
   </main>
 </div>
 <div id="toast" class="toast" role="status" hidden></div>

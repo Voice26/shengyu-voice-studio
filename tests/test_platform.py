@@ -69,6 +69,19 @@ class PlatformTest(unittest.TestCase):
             status, _, _ = self.request('POST', '/api/jobs', '{}', headers)
             self.assertEqual(status, 403)
 
+    def test_external_navigation_opens_the_studio_but_cannot_read_private_endpoints(self):
+        headers = {'Sec-Fetch-Site':'cross-site', 'Sec-Fetch-Mode':'navigate', 'Sec-Fetch-Dest':'document'}
+        for path in ('/?lang=en', '/history?lang=zh'):
+            status, _, _ = self.request('GET', path, headers=headers)
+            self.assertEqual(status, 200)
+        status, _, _ = self.request('GET', '/api/jobs', headers=headers)
+        self.assertEqual(status, 403)
+        status, _, _ = self.request('POST', '/api/jobs', '{}', {**headers, 'X-Voice-Studio':'1'})
+        self.assertEqual(status, 403)
+        status, _, _ = self.request('GET', '/', headers={**headers, 'Sec-Fetch-Dest':'iframe'})
+        self.assertEqual(status, 403)
+
+
     def test_upload_audio_range_and_download_preserve_bytes(self):
         status, record = self.upload()
         self.assertEqual(status, 201)

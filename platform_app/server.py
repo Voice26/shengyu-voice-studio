@@ -351,7 +351,13 @@ class Handler(BaseHTTPRequestHandler):
         origin = self.headers.get('Origin')
         if origin and origin not in (f'http://127.0.0.1:{port}', f'http://localhost:{port}'):
             raise APIError('不允许来自其他页面的请求', 403)
-        if self.headers.get('Sec-Fetch-Site') == 'cross-site':
+        document_navigation = (
+            self.command in ('GET', 'HEAD')
+            and self.headers.get('Sec-Fetch-Mode') == 'navigate'
+            and self.headers.get('Sec-Fetch-Dest') == 'document'
+            and urlsplit(self.path).path in ('/', '/history', '/history/')
+        )
+        if self.headers.get('Sec-Fetch-Site') == 'cross-site' and not document_navigation:
             raise APIError('不允许跨站请求', 403)
         if write and self.headers.get('X-Voice-Studio') != '1':
             raise APIError('请求缺少本地页面标识', 403)
