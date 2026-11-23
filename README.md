@@ -6,6 +6,12 @@ Shengyu (声屿) converts a singing voice into a selected target timbre using RV
 
 The browser interface supports **English and Simplified Chinese**, with upload, voice selection, pitch adjustment, playback, downloads and a dedicated recent-results page. Processing runs on the configured GPU server.
 
+## Illustrated project guide
+
+Follow one singer’s six recordings from vocal separation and model training to a finished song. The guide opens with a three-minute presentation outline and includes English screenshots, a listening example and the commands used in the project.
+
+[Read the English guide on GitHub](docs/english-guide/README.md) · [Download the illustrated Word guide](docs/english-guide/Shengyu-Voice-Studio-Guide-EN.docx?raw=1)
+
 ## Using the interface
 
 1. Upload a song or vocal recording, or select one of the prepared examples.
